@@ -14,7 +14,7 @@ pipeline {
                             sh "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
                         },
                         sonar: {
-                            sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"
+                            sh "mvn sonar:sonar -Dsonar.host.url=http://192.168.99.100:9000"
                         }
                 )
             }
@@ -27,7 +27,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                sh "mvn deploy -DskipTests -Dartifactory_url=${env.ARTIFACTORY_URL}"
+                sh "mvn deploy -DskipTests -Dartifactory_url=http://192.168.99.100:8082"
             }
         }
     }
