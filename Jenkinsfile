@@ -27,7 +27,9 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                sh "mvn deploy -DskipTests -Dartifactory_url=http://192.168.99.100:8082"
+                configFileProvider([configFile(fileId: 'our_settings', variable: 'SETTINGS')]) {
+                    sh "mvn -s $SETTINGS deploy -DskipTests -Dartifactory_url=http://192.168.99.100:8082"
+                }
             }
         }
     }
