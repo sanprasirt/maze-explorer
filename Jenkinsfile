@@ -28,7 +28,7 @@ pipeline {
         stage('deploy') {
             steps {
                 configFileProvider([configFile(fileId: 'our_settings', variable: 'SETTINGS')]) {
-                    sh "mvn -s $SETTINGS deploy -DskipTests -Dartifactory_url=http://192.168.99.100:8082"
+                    sh "mvn -s $SETTINGS deploy -DskipTests -Dartifactory_url=http://192.168.99.100:8082/artifactory/example-repo-local"
                 }
             }
         }
